@@ -4,38 +4,38 @@ import {PlayerProps} from './Player'
 
 
 export const PlayerWrapper = styled.div<PlayerProps>`
- 
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const TimeControl = styled.div<PlayerProps>`
- 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
 `;
 
 export const PlayControl = styled.div<PlayerProps>`
- 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 30%;
 `;
 
-export const StartTime = styled.div<PlayerProps>`
- 
+export const Time = styled.div<PlayerProps>`
+  padding: 1rem;
 `;
 
 export const Range = styled.input<PlayerProps>`
- 
+  width: 100%;
+  padding: 1rem 2rem;
 `;
 
-export const EndTime = styled.div<PlayerProps>`
- 
+export const Option = styled.div<PlayerProps>`
+  cursor: pointer;
 `;
 
-export const Prev = styled.div<PlayerProps>`
- 
-`;
-
-export const Play = styled.div<PlayerProps>`
- 
-`;
-
-export const Next = styled.div<PlayerProps>`
- 
-`;
 

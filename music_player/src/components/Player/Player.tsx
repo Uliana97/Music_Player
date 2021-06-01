@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 // Styled Components
-import { PlayerWrapper, TimeControl, PlayControl, StartTime, Range, EndTime, Prev, Play, Next } from './style'
+import { PlayerWrapper, TimeControl, PlayControl, Time, Range, Option} from './style'
 
 export type PlayerProps = {
   text?: string
@@ -13,14 +13,14 @@ export const Player: React.FC <PlayerProps> = () => {
   return (
       <PlayerWrapper>
         <TimeControl>
-          <StartTime>StartTime</StartTime>
+          <Time className="startTime">StartTime</Time>
           <Range type="range"></Range>
-          <EndTime>EndTime</EndTime>
+          <Time className="endTime">EndTime</Time>
         </TimeControl>
         <PlayControl>
-          <Prev><FontAwesomeIcon size="2x" icon={faAngleLeft} /></Prev>
-          <Play><FontAwesomeIcon size="2x" icon={faPlay} /></Play>
-          <Next><FontAwesomeIcon size="2x" icon={faAngleRight} /></Next>
+          <Option className="prev"><FontAwesomeIcon size="2x" icon={faAngleLeft} /></Option>
+          <Option className="start"><FontAwesomeIcon size="2x" icon={faPlay} /></Option>
+          <Option className="next"><FontAwesomeIcon size="2x" icon={faAngleRight} /></Option>
         </PlayControl>
       </PlayerWrapper>
   ) 

@@ -1,6 +1,6 @@
 import React from 'react'
 // Styled Components
-import { SongPicture, SongName, SongAuthor } from './style'
+import { SongWrapper, SongPicture, SongName, SongAuthor } from './style'
 
 export type SongProps = {
   text? : string
@@ -9,10 +9,10 @@ export type SongProps = {
 
 export const Song: React.FC<SongProps> = () => {
   return (
-    <>
+    <SongWrapper>
       <SongPicture>Picture</SongPicture>
       <SongName>Name</SongName>
       <SongAuthor>Author</SongAuthor>
-    </>
+    </SongWrapper>
   )
 }
