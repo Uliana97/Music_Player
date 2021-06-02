@@ -3,10 +3,7 @@ import { ThemeProvider } from "styled-components";
 
 const theme = {
   colors: {
-    blue: "#0A345F",
-    lightBlue: ' #174D85;',
-    white: "#fff",
-    vanil: "#F8F9FA;",
+    text: "rgb(45, 45, 45)"
   },
   fonts: ["Libre Caslon Display", "serif"],
   fontSizes: {

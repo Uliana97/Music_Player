@@ -1,18 +1,18 @@
 import React from 'react'
 // Styled Components
-import { SongWrapper, SongPicture, SongName, SongAuthor } from './style'
+import {CurrentSongType} from '../../layout/App/App'
+import { SongWrapper, SongPicture, SongName, SongArtist } from './style'
 
-export type SongProps = {
-  text? : string
-  primary?: boolean
+export type SongComponentType = {
+  currentSong: CurrentSongType
 }
 
-export const Song: React.FC<SongProps> = () => {
+export const Song: React.FC<SongComponentType> = ({currentSong : {name, artist, cover}}) => {
   return (
     <SongWrapper>
-      <SongPicture>Picture</SongPicture>
-      <SongName>Name</SongName>
-      <SongAuthor>Author</SongAuthor>
+      <SongPicture src={cover}/> 
+      <SongName>{name}</SongName>
+      <SongArtist>{artist}</SongArtist>
     </SongWrapper>
   )
 }

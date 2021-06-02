@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
-import {PlayerProps} from './Player'
-
-
-export const PlayerWrapper = styled.div<PlayerProps>`
+export const PlayerWrapper = styled.div`
   min-height: 20vh;
   display: flex;
   flex-direction: column;
@@ -11,30 +8,30 @@ export const PlayerWrapper = styled.div<PlayerProps>`
   justify-content: space-between;
 `;
 
-export const TimeControl = styled.div<PlayerProps>`
+export const TimeControl = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 50%;
 `;
 
-export const PlayControl = styled.div<PlayerProps>`
+export const PlayControl = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 30%;
 `;
 
-export const Time = styled.div<PlayerProps>`
+export const Time = styled.div`
   padding: 1rem;
 `;
 
-export const Range = styled.input<PlayerProps>`
+export const Range = styled.input`
   width: 100%;
   padding: 1rem 2rem;
 `;
 
-export const Option = styled.div<PlayerProps>`
+export const Option = styled.div`
   cursor: pointer;
 `;
 
