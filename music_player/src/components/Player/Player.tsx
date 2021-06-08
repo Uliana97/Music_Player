@@ -1,40 +1,19 @@
-import React, {useRef, useState} from 'react'
+import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPause, faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 // Styled Components
-import {TCurrentSongType} from '../../layout/App/App'
+import {TTimeControl} from '../../layout/App/App'
 import { PlayerWrapper, TimeControl, PlayControl, Time, Range, Option} from './style'
 export interface TPlayerComponentType {
-  currentSong: TCurrentSongType;
+  timeControl: TTimeControl;
+  setTimeControl: React.Dispatch<TTimeControl>;
+  audioRef: React.RefObject<HTMLAudioElement>;
   isPlaying: boolean;
   setIsPlaying: React.Dispatch<boolean>;
-}
-interface TTimeControl {
-  currentTime: number;
-  duration: number;
+  handlePlaying: () => void;
 }
 
-export const Player: React.FC <TPlayerComponentType> = ({currentSong: {audio}, isPlaying, setIsPlaying}) => {
-  const audioRef = useRef<HTMLAudioElement>(null)
-
-  const [timeControl, setTimeControl] = useState<TTimeControl>({
-    currentTime: 0,
-    duration: 0
-  })
-
-  const handleAudioTimeUpdate = (event: React.SyntheticEvent<HTMLAudioElement>): void => {
-    setTimeControl({
-      ...timeControl, 
-      currentTime: event.currentTarget.currentTime,
-      duration: event.currentTarget.duration 
-    })
-  }
-
-  const handlePlaying = (): void => {
-    isPlaying ? audioRef?.current?.pause() : audioRef?.current?.play();
-    setIsPlaying(!isPlaying);
-  }
-
+export const Player: React.FC <TPlayerComponentType> = ({isPlaying, handlePlaying, timeControl, setTimeControl, audioRef}) => {
   const handleChangeTime = (event: React.SyntheticEvent<HTMLInputElement>): React.RefObject<HTMLAudioElement> => {
     setTimeControl({
       ...timeControl, 
@@ -66,7 +45,6 @@ export const Player: React.FC <TPlayerComponentType> = ({currentSong: {audio}, i
           </Option>
           <Option className="next"><FontAwesomeIcon size="2x" icon={faAngleRight} /></Option>
         </PlayControl>
-        <audio onTimeUpdate={handleAudioTimeUpdate} onLoadedMetadata={handleAudioTimeUpdate} ref={audioRef} src={audio}></audio>
       </PlayerWrapper>
   ) 
 }
