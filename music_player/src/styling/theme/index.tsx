@@ -3,16 +3,17 @@ import { ThemeProvider } from "styled-components";
 
 const theme = {
   colors: {
+    mainColor: "#C4ACC6",
     text: "rgb(45, 45, 45)"
   },
   fonts: ["Libre Caslon Display", "serif"],
   fontSizes: {
-    xs: "0.875rem",
+    xs: "0.7rem",
     s: "1rem",
-    m: "1.125rem",
+    m: "1.5rem",
     extraM: "2rem",
-    l: "3.4375rem",
-    xl: "4.375rem",
+    l: "3rem",
+    xl: "4rem",
   },
 };
 

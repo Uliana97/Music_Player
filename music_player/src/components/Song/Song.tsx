@@ -1,16 +1,16 @@
 import React from 'react'
 // Styled Components
-import {CurrentSongType} from '../../layout/App/App'
+import {TCurrentSongType} from '../../layout/App/App'
 import { SongWrapper, SongPicture, SongName, SongArtist } from './style'
 
-export type SongComponentType = {
-  currentSong: CurrentSongType
+export interface TSongComponentType {
+  currentSong: TCurrentSongType;
 }
 
-export const Song: React.FC<SongComponentType> = ({currentSong : {name, artist, cover}}) => {
+export const Song: React.FC<TSongComponentType> = ({currentSong : {name, artist, cover}}) => {
   return (
     <SongWrapper>
-      <SongPicture src={cover}/> 
+      <SongPicture alt={`${name}-picture`} src={cover}/> 
       <SongName>{name}</SongName>
       <SongArtist>{artist}</SongArtist>
     </SongWrapper>

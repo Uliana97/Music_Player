@@ -28,7 +28,7 @@ export const Time = styled.div`
 
 export const Range = styled.input`
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
 `;
 
 export const Option = styled.div`

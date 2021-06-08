@@ -12,10 +12,9 @@ export const GlobalStyle = createGlobalStyle`
       margin: 0;
       }
   html,
-  body {
+  body, h1, h2, h3, h4 {
         margin: 0;
         padding: 0;
-        min-height: 100%;
         font-family: Helvetica, sans-serif;
       }
 `;
