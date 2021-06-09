@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+type LibrarySongWrapperProps = {
+  isActive: boolean;
+}
+
 export const LibraryWrapper = styled.div`
   position: fixed;
   width: 25%;
@@ -23,12 +27,13 @@ export const LibraryWrapper = styled.div`
   }
 `;
 
-export const LibrarySongWrapper = styled.div`
+export const LibrarySongWrapper = styled.div<LibrarySongWrapperProps>`
   display: flex;
   align-items: center;
   padding: 1rem;
   cursor: pointer;
   color: ${({ theme: { colors } }) => colors.text};
+  background-color: ${({ isActive }) => isActive && 'rgb(218 199 221)'};
   &:hover {
     background-color: ${({ theme: { colors } }) => colors.mainColor};
   }

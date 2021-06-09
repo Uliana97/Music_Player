@@ -55,6 +55,7 @@ export const App: React.FC = () => {
         currentSong={currentSong} 
         setCurrentSong={setCurrentSong} 
         isPlaying={isPlaying}
+        setSongs={setSongs}
       />
       <Song currentSong={currentSong}/>
       <Player 

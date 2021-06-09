@@ -36,7 +36,7 @@ export const chillHop = () => {
       audio: "https://mp3.chillhop.com/serve.php/?mp3=10136",
       color: ['#E9D49E', '#2B59AC'],
       id: uuidv4(),
-      active: true,
+      active: false,
     },
     {
       name: "Lilo",
@@ -45,7 +45,7 @@ export const chillHop = () => {
       audio: "https://mp3.chillhop.com/serve.php/?mp3=11244",
       color: ['#BBD2D6', '#4C6045'],
       id: uuidv4(),
-      active: true,
+      active: false,
     },
     {
       name: "Hau Nalu",
@@ -72,7 +72,7 @@ export const chillHop = () => {
       audio: "https://mp3.chillhop.com/serve.php/?mp3=10136",
       color: ['#E9D49E', '#2B59AC'],
       id: uuidv4(),
-      active: true,
+      active: false,
     },
     // {
     //   name: "",
