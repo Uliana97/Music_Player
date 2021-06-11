@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPause, faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 // Styled Components
 import {TTimeControl, TCurrentSongType} from '../../layout/App/App'
-import { PlayerWrapper, TimeControl, PlayControl, Time, Range, Option} from './style'
+import { PlayerWrapper, TimeControl, PlayControl, Time, Range, Option, Track, AnimationTrack} from './style'
 export interface TPlayerComponentType {
   timeControl: TTimeControl;
   currentSong:TCurrentSongType;
@@ -34,7 +34,7 @@ export const Player: React.FC <TPlayerComponentType> = ({isPlaying, handlePlayin
   }
 
   // Set prev or next song when click on arrors
-  const handleSkipSong = (direction: number) => {
+  const handleSkipSong = (direction: number): void => {
     const currentIndex = songs.findIndex(x => x.id === currentSong.id)
     if (direction === Direction.Next) {
       // % helps us to start from zero when array ends
@@ -56,13 +56,16 @@ export const Player: React.FC <TPlayerComponentType> = ({isPlaying, handlePlayin
     )
   }
 
-  const {duration, currentTime} = timeControl;
+  const {duration, currentTime, animationPercents} = timeControl;
 
   return (
       <PlayerWrapper>
         <TimeControl>
           <Time className="startTime">{formatTime(currentTime)}</Time>
-          <Range type="range" onChange={handleChangeTime} min={0} max={duration} value={currentTime}></Range>
+          <Track gradient={currentSong.color}>
+            <Range type="range" onChange={handleChangeTime} min={0} max={duration} value={currentTime}/>
+            <AnimationTrack animation={animationPercents}/>
+          </Track>
           <Time className="endTime">{formatTime(duration - currentTime)}</Time>
         </TimeControl>
         <PlayControl>

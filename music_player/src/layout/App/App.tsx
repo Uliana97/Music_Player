@@ -20,6 +20,7 @@ export interface TCurrentSongType {
 export interface TTimeControl {
   currentTime: number;
   duration: number;
+  animationPercents: number;
 }
 
 export const App: React.FC = () => {
@@ -28,7 +29,8 @@ export const App: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
   const [timeControl, setTimeControl] = useState<TTimeControl>({
     currentTime: 0,
-    duration: 0
+    duration: 0,
+    animationPercents: 0,
   })
 
   // Reference on audio element
@@ -36,10 +38,14 @@ export const App: React.FC = () => {
 
   // onTimeUpdate
   const handleAudioTimeUpdate = (event: React.SyntheticEvent<HTMLAudioElement>): void => {
+    const roundedCurrentTime = Math.round(timeControl.currentTime)
+    const roundedDuration = Math.round(timeControl.duration)
+    const animation = Math.round((roundedCurrentTime / roundedDuration) * 100)
     setTimeControl({
       ...timeControl, 
       currentTime: event.currentTarget.currentTime,
-      duration: event.currentTarget.duration 
+      duration: event.currentTarget.duration,
+      animationPercents: animation
     })
   }
 
