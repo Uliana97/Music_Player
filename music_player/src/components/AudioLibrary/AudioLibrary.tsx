@@ -5,30 +5,13 @@ import { LibraryWrapper, LibrarySongWrapper, ArtistInfo, LibrarySongPicture, Lib
 
 export interface TAudioLibraryType {
   songs: TCurrentSongType[];
-  audioRef: React.RefObject<HTMLAudioElement>;
-  currentSong: TCurrentSongType;
   setCurrentSong: React.Dispatch<TCurrentSongType>;
-  setSongs: React.Dispatch<TCurrentSongType[]>
-  isPlaying: boolean;
 }
 
-export const AudioLibrary: React.FC<TAudioLibraryType> = ({songs, audioRef, setCurrentSong, isPlaying, setSongs}) => {
+export const AudioLibrary: React.FC<TAudioLibraryType> = ({songs, setCurrentSong}) => {
   const handleChoosefromLibrary = (id: string) => {
-    const newSongsArray = songs.map((i) => {
-      return {
-        ...i,
-        active: i.id === id ? true : false
-      }
-    })
-
-    setSongs(newSongsArray);
-
     const newSong = songs.find((song) => song.id === id);
     newSong && setCurrentSong(newSong);
-
-    isPlaying && audioRef.current?.play()
-    .then(() => audioRef.current?.play())
-    .catch((e) => console.log(e))
   }
   
   return (

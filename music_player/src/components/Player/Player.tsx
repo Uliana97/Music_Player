@@ -2,25 +2,52 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPause, faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 // Styled Components
-import {TTimeControl} from '../../layout/App/App'
+import {TTimeControl, TCurrentSongType} from '../../layout/App/App'
 import { PlayerWrapper, TimeControl, PlayControl, Time, Range, Option} from './style'
 export interface TPlayerComponentType {
   timeControl: TTimeControl;
+  currentSong:TCurrentSongType;
+  songs: TCurrentSongType[];
   setTimeControl: React.Dispatch<TTimeControl>;
   audioRef: React.RefObject<HTMLAudioElement>;
   isPlaying: boolean;
   setIsPlaying: React.Dispatch<boolean>;
+  setCurrentSong: React.Dispatch<TCurrentSongType>;
   handlePlaying: () => void;
 }
 
-export const Player: React.FC <TPlayerComponentType> = ({isPlaying, handlePlaying, timeControl, setTimeControl, audioRef}) => {
+enum Direction {
+  Next,
+  Prev,
+}
+
+export const Player: React.FC <TPlayerComponentType> = ({isPlaying, handlePlaying, timeControl, setTimeControl, audioRef, currentSong, songs, setCurrentSong}) => {
+  // We change currentTime when range was changed
   const handleChangeTime = (event: React.SyntheticEvent<HTMLInputElement>): React.RefObject<HTMLAudioElement> => {
     setTimeControl({
       ...timeControl, 
       currentTime: +event.currentTarget.value,
     })
+    // Also we need to change time of played music
     // @ts-ignore: Unreachable code error
     return audioRef.current.currentTime = +event.currentTarget.value;
+  }
+
+  // Set prev or next song when click on arrors
+  const handleSkipSong = (direction: number) => {
+    const currentIndex = songs.findIndex(x => x.id === currentSong.id)
+    if (direction === Direction.Next) {
+      // % helps us to start from zero when array ends
+      setCurrentSong(songs[(currentIndex + 1) % songs.length])
+    } 
+    else {
+      // If index is zero we want to switch on last song
+      currentIndex === 0 
+      ? 
+      setCurrentSong(songs[songs.length - 1])
+      :
+      setCurrentSong(songs[(currentIndex - 1) % songs.length])
+    }
   }
 
   const formatTime = (time: number): string => {
@@ -39,11 +66,11 @@ export const Player: React.FC <TPlayerComponentType> = ({isPlaying, handlePlayin
           <Time className="endTime">{formatTime(duration - currentTime)}</Time>
         </TimeControl>
         <PlayControl>
-          <Option className="prev"><FontAwesomeIcon size="2x" icon={faAngleLeft} /></Option>
+          <Option className="prev" onClick={() => handleSkipSong(Direction.Prev)}><FontAwesomeIcon size="2x" icon={faAngleLeft} /></Option>
           <Option className="start" onClick={handlePlaying}>
             <FontAwesomeIcon size="2x" icon={isPlaying ? faPause : faPlay} />
           </Option>
-          <Option className="next"><FontAwesomeIcon size="2x" icon={faAngleRight} /></Option>
+          <Option className="next" onClick={() => handleSkipSong(Direction.Next)}><FontAwesomeIcon size="2x" icon={faAngleRight} /></Option>
         </PlayControl>
       </PlayerWrapper>
   ) 

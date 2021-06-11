@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, {useState, useRef, useEffect} from "react";
 
 import Theme from "../../styling/theme";
 import { GlobalStyle } from "./style";
@@ -31,8 +31,10 @@ export const App: React.FC = () => {
     duration: 0
   })
 
+  // Reference on audio element
   const audioRef = useRef<HTMLAudioElement>(null)
 
+  // onTimeUpdate
   const handleAudioTimeUpdate = (event: React.SyntheticEvent<HTMLAudioElement>): void => {
     setTimeControl({
       ...timeControl, 
@@ -41,21 +43,38 @@ export const App: React.FC = () => {
     })
   }
 
+  // When click on "Play" button we want to pause/play music
   const handlePlaying = (): void => {
     isPlaying ? audioRef?.current?.pause() : audioRef?.current?.play();
     setIsPlaying(!isPlaying);
   }
+
+  useEffect(() => {
+    // When changed current song
+    // New array with changed active song
+    const newSongsArray = songs.map((i) => {
+      return {
+        ...i,
+        active: i.id === currentSong.id ? true : false
+      }
+    })
+    // Set new array
+    setSongs(newSongsArray);
+
+    // If music was played we want to play currentSing too
+    // audioRef.current?.play() return Promise 
+    isPlaying && audioRef.current?.play()
+    .then(() => audioRef.current?.play())
+    .catch((e) => console.log(e))
+    
+  }, [currentSong])
 
   return (
     <Theme>
       <GlobalStyle />
       <AudioLibrary 
         songs={songs} 
-        audioRef={audioRef} 
-        currentSong={currentSong} 
         setCurrentSong={setCurrentSong} 
-        isPlaying={isPlaying}
-        setSongs={setSongs}
       />
       <Song currentSong={currentSong}/>
       <Player 
@@ -65,8 +84,11 @@ export const App: React.FC = () => {
         isPlaying={isPlaying} 
         setIsPlaying={setIsPlaying}
         audioRef={audioRef}
+        currentSong={currentSong}
+        songs={songs} 
+        setCurrentSong={setCurrentSong}
        />
-      <audio onTimeUpdate={handleAudioTimeUpdate} onLoadedMetadata={handleAudioTimeUpdate} ref={audioRef} src={currentSong.audio}></audio>
+      <audio onTimeUpdate={handleAudioTimeUpdate} onLoadedMetadata={handleAudioTimeUpdate} ref={audioRef} src={currentSong?.audio}></audio>
     </Theme>
   );
 };
