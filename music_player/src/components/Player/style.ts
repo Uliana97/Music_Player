@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { device } from "../../styling/breakpoints";
+
 type AnimationTrackProps = {
   animation: number;
 }
@@ -14,6 +16,7 @@ export const PlayerWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  
 `;
 
 export const TimeControl = styled.div`
@@ -21,6 +24,10 @@ export const TimeControl = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 50%;
+
+  @media ${device.tablet} {
+    width: 85%;
+  }
 `;
 
 export const PlayControl = styled.div`
@@ -28,6 +35,10 @@ export const PlayControl = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 30%;
+
+  @media ${device.tablet} {
+    width: 60%;
+  }
 `;
 
 export const Time = styled.div`
@@ -70,6 +81,7 @@ export const Range = styled.input`
   &:focus {
     outline: none;
   }
+  
 `;
 
 export const Option = styled.div`

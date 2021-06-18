@@ -1,11 +1,15 @@
 import React, {useState, useRef, useEffect} from "react";
 
+// Todo Path Alias, State Management, Dark theme, Random song
 import Theme from "../../styling/theme";
 import { GlobalStyle } from "./style";
+
+import { chillHop } from "../../utils/utils"
+
 import { Song } from "../../components/Song";
 import { Player } from "../../components/Player";
-import { chillHop } from "../../utils/utils"
 import { AudioLibrary } from "../../components/AudioLibrary";
+import { Header } from "../../components/Header";
 
 export interface TCurrentSongType {
   name: string;
@@ -27,6 +31,7 @@ export const App: React.FC = () => {
   const [songs, setSongs] = useState<TCurrentSongType[]>(chillHop())
   const [currentSong, setCurrentSong] = useState<TCurrentSongType>(songs[0])
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
+  const [isOpenLibrary, setIsOpenLibrary] = useState<boolean>(false)
   const [timeControl, setTimeControl] = useState<TTimeControl>({
     currentTime: 0,
     duration: 0,
@@ -55,13 +60,17 @@ export const App: React.FC = () => {
     setIsPlaying(!isPlaying);
   }
 
+  const handleLibrarySwitch = (): void => setIsOpenLibrary(!isOpenLibrary)
+
+  const currentIndex = songs.findIndex(x => x.id === currentSong.id)
+
   useEffect(() => {
     // When changed current song
     // New array with changed active song
-    const newSongsArray = songs.map((i) => {
+    const newSongsArray = songs.map((song) => {
       return {
-        ...i,
-        active: i.id === currentSong.id ? true : false
+        ...song,
+        active: song.id === currentSong.id
       }
     })
     // Set new array
@@ -78,11 +87,13 @@ export const App: React.FC = () => {
   return (
     <Theme>
       <GlobalStyle />
+      <Header handleLibrarySwitch={handleLibrarySwitch}/>
       <AudioLibrary 
         songs={songs} 
-        setCurrentSong={setCurrentSong} 
+        setCurrentSong={setCurrentSong}
+        isOpenLibrary={isOpenLibrary} 
       />
-      <Song currentSong={currentSong}/>
+      <Song currentSong={currentSong} setIsOpenLibrary={setIsOpenLibrary}/>
       <Player 
         timeControl={timeControl}
         setTimeControl={setTimeControl} 
@@ -93,8 +104,15 @@ export const App: React.FC = () => {
         currentSong={currentSong}
         songs={songs} 
         setCurrentSong={setCurrentSong}
+        setIsOpenLibrary={setIsOpenLibrary}
        />
-      <audio onTimeUpdate={handleAudioTimeUpdate} onLoadedMetadata={handleAudioTimeUpdate} ref={audioRef} src={currentSong?.audio}></audio>
+      <audio 
+        onTimeUpdate={handleAudioTimeUpdate} 
+        onLoadedMetadata={handleAudioTimeUpdate} 
+        onEnded={() => setCurrentSong(songs[(currentIndex + 1) % songs.length])} 
+        ref={audioRef} 
+        src={currentSong?.audio}>
+      </audio>
     </Theme>
   );
 };

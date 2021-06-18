@@ -13,6 +13,7 @@ export interface TPlayerComponentType {
   isPlaying: boolean;
   setIsPlaying: React.Dispatch<boolean>;
   setCurrentSong: React.Dispatch<TCurrentSongType>;
+  setIsOpenLibrary: React.Dispatch<boolean>;
   handlePlaying: () => void;
 }
 
@@ -21,7 +22,7 @@ enum Direction {
   Prev,
 }
 
-export const Player: React.FC <TPlayerComponentType> = ({isPlaying, handlePlaying, timeControl, setTimeControl, audioRef, currentSong, songs, setCurrentSong}) => {
+export const Player: React.FC <TPlayerComponentType> = ({isPlaying, handlePlaying, timeControl, setTimeControl, audioRef, currentSong, songs, setCurrentSong, setIsOpenLibrary}) => {
   // We change currentTime when range was changed
   const handleChangeTime = (event: React.SyntheticEvent<HTMLInputElement>): React.RefObject<HTMLAudioElement> => {
     setTimeControl({
@@ -59,7 +60,7 @@ export const Player: React.FC <TPlayerComponentType> = ({isPlaying, handlePlayin
   const {duration, currentTime, animationPercents} = timeControl;
 
   return (
-      <PlayerWrapper>
+      <PlayerWrapper onClick={() => setIsOpenLibrary(false)}>
         <TimeControl>
           <Time className="startTime">{formatTime(currentTime)}</Time>
           <Track gradient={currentSong.color}>
