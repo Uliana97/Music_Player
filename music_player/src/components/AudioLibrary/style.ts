@@ -19,8 +19,9 @@ export const LibraryWrapper = styled.div<LibraryWrapperProps>`
   left: -25%;
   height: 100%;
   overflow-y: auto;
-  -webkit-box-shadow: 5px 0px 15px 0px #C1C1C1; 
-  box-shadow: 5px 0px 15px 0px #C1C1C1;
+  -webkit-box-shadow: 5px 0px 15px 0px ${({ theme: { colors } }) => colors.libraryShadow}; 
+  box-shadow: 5px 0px 15px 0px ${({ theme: { colors } }) => colors.libraryShadow};
+  background-color: ${({ theme: { colors } }) => colors.bg};
   transform: ${({ isOpenLibrary }) => isOpenLibrary && 'translateX(100%)'};
   transition: transform ease-in 0.1s;
 
@@ -33,7 +34,7 @@ export const LibraryWrapper = styled.div<LibraryWrapperProps>`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: darkgrey;
+    background-color: ${({ theme: { colors } }) => colors.bg};
   }
 
   @media ${device.laptop} {
@@ -58,7 +59,7 @@ export const LibrarySongWrapper = styled.div<LibrarySongWrapperProps>`
   padding: 1rem;
   cursor: pointer;
   color: ${({ theme: { colors } }) => colors.text};
-  background-color: ${({ isActive }) => isActive && 'rgb(218 199 221)'};
+  background-color: ${({ isActive, theme: { colors } }) => isActive && colors.active};
 
   &:hover {
     background-color: ${({ theme: { colors } }) => colors.mainColor};

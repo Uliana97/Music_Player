@@ -9,6 +9,16 @@ to {
   }
 `;
 
+export const ThemeSwitcher = styled.div`
+  color: ${({ theme: { colors } }) => colors.LibrarySwitcher};
+  cursor: pointer;
+  font-size: ${({ theme: { fontSizes } }) => fontSizes.m};
+
+  &:hover{
+   color: ${({ theme: { colors } }) => colors.text};
+  }
+`;
+
 export const HeaderWrapper = styled.div`
   max-width: 55%;
   margin: 0 auto;
@@ -23,7 +33,7 @@ export const HeaderWrapper = styled.div`
 `;
 
 export const Logo = styled.h1`
-  z-index:-1;
+  color: ${({ theme: { colors } }) => colors.LibrarySwitcher};
 
   @media ${device.tablet} {
     font-size: ${({ theme: { fontSizes } }) => fontSizes.s};
@@ -35,7 +45,7 @@ export const LibrarySwitcher = styled.button`
   padding: 1rem 2rem;
   -webkit-appearance: none;
   appearance: none;
-  background-color: #ff0081;
+  background-color: ${({ theme: { colors } }) => colors.LibrarySwitcher};
   color: white;
   border-radius: 4px;
   border: none;

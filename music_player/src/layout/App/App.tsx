@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from "react";
 
 // Todo Path Alias, State Management, Dark theme, Random song
-import Theme from "../../styling/theme";
+import {Theme} from "../../styling/theme";
 import { GlobalStyle } from "./style";
 
 import { chillHop } from "../../utils/utils"
@@ -32,11 +32,17 @@ export const App: React.FC = () => {
   const [currentSong, setCurrentSong] = useState<TCurrentSongType>(songs[0])
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
   const [isOpenLibrary, setIsOpenLibrary] = useState<boolean>(false)
+  const [theme, setTheme] = useState<string>('light')
   const [timeControl, setTimeControl] = useState<TTimeControl>({
     currentTime: 0,
     duration: 0,
     animationPercents: 0,
   })
+
+  enum ETheme {
+    DARK = "dark",
+    LIGHT = "light",
+  }
 
   // Reference on audio element
   const audioRef = useRef<HTMLAudioElement>(null)
@@ -60,9 +66,11 @@ export const App: React.FC = () => {
     setIsPlaying(!isPlaying);
   }
 
-  const handleLibrarySwitch = (): void => setIsOpenLibrary(!isOpenLibrary)
+  const handleLibrarySwitch = (): void => setIsOpenLibrary(!isOpenLibrary);
 
-  const currentIndex = songs.findIndex(x => x.id === currentSong.id)
+  const handleThemeSwitch = (): void => theme === ETheme.LIGHT ? setTheme(ETheme.DARK) : setTheme(ETheme.LIGHT);
+
+  const currentIndex = songs.findIndex(x => x.id === currentSong.id);
 
   useEffect(() => {
     // When changed current song
@@ -85,9 +93,9 @@ export const App: React.FC = () => {
   }, [currentSong])
 
   return (
-    <Theme>
+    <Theme Theme={theme}>
       <GlobalStyle />
-      <Header handleLibrarySwitch={handleLibrarySwitch}/>
+      <Header handleLibrarySwitch={handleLibrarySwitch} handleThemeSwitch={handleThemeSwitch} Theme={theme}/>
       <AudioLibrary 
         songs={songs} 
         setCurrentSong={setCurrentSong}

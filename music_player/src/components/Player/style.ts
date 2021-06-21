@@ -43,6 +43,7 @@ export const PlayControl = styled.div`
 
 export const Time = styled.div`
   padding: 1rem;
+  color: ${({ theme: { colors } }) => colors.text}
 `;
 
 export const Track = styled.div<TrackProps>`
@@ -60,7 +61,7 @@ export const AnimationTrack = styled.div<AnimationTrackProps>`
   left: 0;
   height: 100%;
   width: 100%;
-  background: #f3f3f3;
+  background: ${({ theme: { colors } }) => colors.track};
   pointer-events: none;
   transform: ${({ animation }) => `translateX(${animation}%)`};
 `;
@@ -86,6 +87,7 @@ export const Range = styled.input`
 
 export const Option = styled.div`
   cursor: pointer;
+  color: ${({ theme: { colors } }) => colors.player};
 `;
 
 
