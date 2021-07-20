@@ -1,15 +1,15 @@
 import React, {useState, useRef, useEffect} from "react";
 
 // Todo Path Alias, State Management, Dark theme, Random song
-import {Theme} from "../../styling/theme";
+import {Theme} from "styling/theme";
 import { GlobalStyle } from "./style";
 
-import { chillHop } from "../../utils/utils"
+import { chillHop } from "utils/utils"
 
-import { Song } from "../../components/Song";
-import { Player } from "../../components/Player";
-import { AudioLibrary } from "../../components/AudioLibrary";
-import { Header } from "../../components/Header";
+import { Song } from "components/Song";
+import { Player } from "components/Player";
+import { AudioLibrary } from "components/AudioLibrary";
+import { Header } from "components/Header";
 
 export interface TCurrentSongType {
   name: string;

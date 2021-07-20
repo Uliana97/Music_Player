@@ -1,6 +1,6 @@
 import React from 'react'
 // Styled Components
-import {TCurrentSongType} from '../../layout/App'
+import {TCurrentSongType} from 'layout/App'
 import { LibraryWrapper, LibrarySongWrapper, ArtistInfo, LibrarySongPicture, LibrarySongName, LibrarySongArtist } from './style'
 
 export interface TAudioLibraryType {

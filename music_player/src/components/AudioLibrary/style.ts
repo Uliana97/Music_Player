@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { device } from "../../styling/breakpoints";
+import { device } from "styling/breakpoints";
 
 type LibrarySongWrapperProps = {
   isActive: boolean;

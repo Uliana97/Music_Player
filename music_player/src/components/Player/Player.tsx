@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPause, faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 // Styled Components
-import {TTimeControl, TCurrentSongType} from '../../layout/App/App'
+import {TTimeControl, TCurrentSongType} from 'layout/App/App'
 import { PlayerWrapper, TimeControl, PlayControl, Time, Range, Option, Track, AnimationTrack} from './style'
 export interface TPlayerComponentType {
   timeControl: TTimeControl;

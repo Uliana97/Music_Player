@@ -1,7 +1,7 @@
 
 import { createGlobalStyle } from "styled-components";
 
-import {ThemeType} from "../../styling/theme";
+import {ThemeType} from "styling/theme";
 
 type Props = {
   theme: ThemeType

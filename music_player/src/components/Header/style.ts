@@ -1,6 +1,6 @@
 import styled, {keyframes} from "styled-components";
 
-import { device } from "../../styling/breakpoints";
+import { device } from "styling/breakpoints";
 
 const slidebg = keyframes`
 
@@ -54,7 +54,6 @@ export const LibrarySwitcher = styled.button`
   text-transform: uppercase;
   transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
   box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);
-  z-index: 101;
   font-size: ${({ theme: { fontSizes } }) => fontSizes.xs};
 
   & span {
